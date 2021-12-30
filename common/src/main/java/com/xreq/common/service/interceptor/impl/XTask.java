@@ -18,6 +18,10 @@ public abstract class XTask<T extends XReq> implements Task<T> {
         this.taskName = taskName;
     }
 
+    public XTask() {
+        this.taskName = this.getClass().getSimpleName();
+    }
+
     public void setResult(XReq input, ErrorCode errCode) {
         setResult(input, errCode, "Error found");
     }

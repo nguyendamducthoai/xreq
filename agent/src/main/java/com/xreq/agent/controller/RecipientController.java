@@ -1,6 +1,8 @@
 package com.xreq.agent.controller;
 
+import com.xreq.agent.service.task.random.RandomAddrTask;
 import com.xreq.agent.service.task.random.RandomEmailTask;
+import com.xreq.agent.service.task.random.RandomNameTask;
 import com.xreq.agent.service.task.render.RenderRequestWorkFlow;
 import com.xreq.common.model.XReqBody;
 import com.xreq.common.service.interceptor.impl.XWorkflow;
@@ -10,9 +12,7 @@ import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
-import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 
 @RestController
 @RequestMapping("/handle")
@@ -25,6 +25,12 @@ public class RecipientController {
     @Autowired
     RandomEmailTask randomEmailTask;
 
+    @Autowired
+    RandomNameTask randomNameTask;
+
+    @Autowired
+    RandomAddrTask randomAddrTask;
+
     @GetMapping
     String ping() {
         return "pong";
@@ -34,6 +40,8 @@ public class RecipientController {
     public void onInit() {
 //        this.renderRequestWorkFlow.getTasks().add(0, randomEmailTask);
         myW.addTask(randomEmailTask);
+        myW.addTask(randomNameTask);
+        myW.addTask(randomAddrTask);
         myW.addTask(renderRequestWorkFlow);
     }
 
