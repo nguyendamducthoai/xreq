@@ -15,7 +15,6 @@ import javax.validation.Valid;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
-@RequestMapping("/handle")
 public class RecipientController {
 
     RenderRequestWorkFlow renderRequestWorkFlow;
@@ -38,14 +37,13 @@ public class RecipientController {
 
     @PostConstruct
     public void onInit() {
-//        this.renderRequestWorkFlow.getTasks().add(0, randomEmailTask);
         myW.addTask(randomEmailTask);
         myW.addTask(randomNameTask);
         myW.addTask(randomAddrTask);
         myW.addTask(renderRequestWorkFlow);
     }
 
-    @PostMapping
+    @PostMapping("/handle-string")
     Mono<XReqBody> handle(@Valid @RequestBody XReqBody input) {
         CompletableFuture<XReqBody> stringFuture = new CompletableFuture<>();
         myW.handle(input, x -> {
