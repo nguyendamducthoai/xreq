@@ -7,7 +7,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Data
@@ -25,8 +24,6 @@ public class XReqBody implements XReq {
     @NotNull
     private String method;
 
-//    private boolean success = true;
-
     private long errCode;
 
     private String errDesc;
@@ -35,15 +32,9 @@ public class XReqBody implements XReq {
 
     private Map<String, Object> model = new HashMap<>();
 
-    private List<InterceptorParam> bodyRequestInterceptors;
-    private List<InterceptorParam> bodyResponseInterceptors;
-
     @NotNull
     @NotEmpty
     private Map<String, String> headers;
-
-    private List<InterceptorParam> headerRequestInterceptors;
-    private List<InterceptorParam> headerResponseInterceptors;
 
     public boolean isSuccess() {
         return getError().getValue() == 0;
