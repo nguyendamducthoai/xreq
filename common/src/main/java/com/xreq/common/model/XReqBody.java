@@ -37,7 +37,7 @@ public class XReqBody implements XReq {
     private Map<String, String> headers;
 
     public boolean isSuccess() {
-        return getError().getValue() == 0;
+        return getError() == ErrorCode.SUCCESS;
     }
 
 }
